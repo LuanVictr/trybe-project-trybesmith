@@ -7,7 +7,6 @@ services:
     image: node:16
     # Usuário linux padrão do container, não é recomendado usar root
     # https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#non-root-user
-    user: node
     # Nome do container para facilitar execução
     container_name: trybesmith
     # Mesmo que `docker run -t`
