@@ -14,6 +14,11 @@ class ProductsControler {
       res.status(error.status).json({ message: error.message });
     }
   };
+
+  public getProducts = async (_req: Request, res: Response) => {
+    const products = await this.productService.getProducts();
+    res.status(200).send(products);
+  };
 }
 
 export default ProductsControler;

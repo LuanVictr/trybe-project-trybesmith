@@ -33,6 +33,11 @@ class ProductsService {
       amount: product.amount,
     };
   }
+
+  public async getProducts():Promise<Product[]> {
+    const products = await this.model.getProducts();
+    return products;
+  }
 }
 
 export default ProductsService;
