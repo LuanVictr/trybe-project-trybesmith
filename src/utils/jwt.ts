@@ -3,6 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+interface UserInfo {
+  username: string;
+  id?:number
+}
+
 class JasonWebToken {
   private secret: string;
 
@@ -10,8 +15,8 @@ class JasonWebToken {
     this.secret = process.env.JWT_SECRET!;
   }
 
-  public generateToken(username:string):string {
-    return jwt.sign(username, this.secret);
+  public generateToken(user:UserInfo):string {
+    return jwt.sign(user, this.secret);
   }
 
   public async authenticateToken(token:string):Promise<string | JwtPayload> {

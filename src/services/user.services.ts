@@ -32,7 +32,7 @@ class UserServices {
       );
     }
     await this.model.createUser(userInfo);
-    const token = this.jtoken.generateToken(userInfo.username);
+    const token = this.jtoken.generateToken({ username: userInfo.username });
     return token;
   }
 }
