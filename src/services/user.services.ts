@@ -15,20 +15,21 @@ class UserServices {
 
   static validateUser(object: User) {
     const userSchemma = Joi.object({
-      username: Joi.string().required(),
-      vocation: Joi.string().required(),
-      level: Joi.number().required(),
-      password: Joi.string().required(),
+      username: Joi.string().min(3).required(),
+      vocation: Joi.string().min(3).required(),
+      level: Joi.number().min(1).required(),
+      password: Joi.string().min(8).required(),
     });
     return userSchemma.validate(object);
   }
 
   public async createUser(userInfo: User) {
     const { error } = UserServices.validateUser(userInfo);
+    console.log(error);
     if (error) {
       throw Object.assign(
-        new Error('Some of the reqired fields are missing'),
-        { status: 500 },
+        new Error(error.message),
+        error.details[0].type === 'any.required' ? { status: 400 } : { status: 422 },
       );
     }
     await this.model.createUser(userInfo);
